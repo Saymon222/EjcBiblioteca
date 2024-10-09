@@ -10,15 +10,21 @@ public class Main {
         int opcion;
 
         do {
-            System.out.println("\n--- Biblioteca ---");
-            System.out.println("1. Agregar libro");
-            System.out.println("2. Eliminar libro");
-            System.out.println("3. Buscar libro");
-            System.out.println("4. Mostrar todos los libros");
-            System.out.println("5. Salir");
-            System.out.print("Elija una opción: ");
+            System.out.println("+------------------------------------------------------+");
+            System.out.println("|                 Gestión de Biblioteca                |");
+            System.out.println("+------------------------------------------------------+");
+            System.out.println("|                      Opciones                        |");
+            System.out.println("+------------------------------------------------------+");
+            System.out.println("| 1. Agregar libro                                     |");
+            System.out.println("| 2. Buscar libro                                      |");
+            System.out.println("| 3. Mostrar todos los libros                          |");
+            System.out.println("| 4. Mostrar la cantidad de libros                     |");
+            System.out.println("| 5. Actualizar información de un libro                |");
+            System.out.println("| 6. Eliminar libro                                    |");
+            System.out.println("| 7. Salir                                             |");
+            System.out.println("+------------------------------------------------------+");
+            System.out.print("Elige una opción: ");
             opcion = lectura.nextInt();
-
             lectura.nextLine();
 
             switch (opcion) {
@@ -35,12 +41,6 @@ public class Main {
                     break;
 
                 case 2:
-                    System.out.print("Ingrese el ISBN del libro a eliminar: ");
-                    String isbnEliminar = lectura.nextLine();
-                    biblioteca.eliminarLibro(isbnEliminar);
-                    break;
-
-                case 3:
                     System.out.print("Ingrese el ISBN del libro a buscar: ");
                     String isbnBuscar = lectura.nextLine();
                     Libro libroEncontrado = biblioteca.buscarLibro(isbnBuscar);
@@ -51,20 +51,48 @@ public class Main {
                     }
                     break;
 
-                case 4:
+                case 3:
                     biblioteca.mostrarLibros();
                     break;
 
+                case 4:
+                    biblioteca.mostrarTotalLibros();
+                    break;
+
                 case 5:
+                    System.out.print("Ingrese el ISBN del libro a actualizar: ");
+                    String isbnActualizar = lectura.nextLine();
+
+                    if (biblioteca.buscarLibro(isbnActualizar) != null) {
+                        System.out.print("Ingrese el nuevo título del libro: ");
+                        String nuevoTitulo = lectura.nextLine();
+                        System.out.print("Ingrese el nuevo autor del libro: ");
+                        String nuevoAutor = lectura.nextLine();
+
+                        biblioteca.actualizarLibro(isbnActualizar, nuevoTitulo, nuevoAutor); // Actualizar libro
+                    } else {
+                        System.out.println("No se encontró un libro con el ISBN: " + isbnActualizar);
+                    }
+                    break;
+
+
+
+                case 6:
+                    System.out.print("Ingrese el ISBN del libro a eliminar: ");
+                    String isbnEliminar = lectura.nextLine();
+                    biblioteca.eliminarLibro(isbnEliminar);
+                    break;
+
+                case 7:
                     System.out.println("Saliendo del programa. ¡Hasta luego!");
                     break;
+
 
                 default:
                     System.out.println("Opción no válida. Por favor, elija una opción entre 1 y 5.");
                     break;
             }
-        } while (opcion != 5);
-
+        } while (opcion != 7);
 
     }
 }

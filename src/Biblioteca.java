@@ -12,15 +12,6 @@ public class Biblioteca {
         System.out.println("Libro agregado:  "+ libro.getTitulo());
     }
 
-    public void eliminarLibro(String isbn) {
-        Libro libro = libros.remove(isbn);
-        if (libro != null) {
-            System.out.println("Libro eliminado: " + libro.getTitulo());
-        } else {
-            System.out.println("No se encontró un libro con el ISBN: " + isbn);
-        }
-    }
-
     public Libro buscarLibro(String isbn){
         return libros.get(isbn);
     }
@@ -35,4 +26,29 @@ public class Biblioteca {
             }
         }
     }
+
+    public void mostrarTotalLibros() {
+        System.out.println("Total de libros en la biblioteca: " + libros.size());
+    }
+
+    public void actualizarLibro(String isbn, String nuevoTitulo, String nuevoAutor) {
+        Libro libro = libros.get(isbn);
+        if (libro != null) {
+            libro.setTitulo(nuevoTitulo);
+            libro.setAutor(nuevoAutor);
+            System.out.println("Información actualizada: " + libro);
+        } else {
+            System.out.println("No se encontró un libro con el ISBN: " + isbn);
+        }
+    }
+
+    public void eliminarLibro(String isbn) {
+        Libro libro = libros.remove(isbn);
+        if (libro != null) {
+            System.out.println("Libro eliminado: " + libro.getTitulo());
+        } else {
+            System.out.println("No se encontró un libro con el ISBN: " + isbn);
+        }
+    }
+
 }
